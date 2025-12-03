@@ -65,12 +65,12 @@ class VendedorService:
 
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute('SELECT matricula, nome, comissao FROM cadastro.vendedor WHERE nome ILIKE %s', (f'%{nome}%',))
+        cur.execute('SELECT matricula, nome, comissao, senha FROM cadastro.vendedor WHERE nome ILIKE %s', (f'%{nome}%',))
         vendedores = cur.fetchall()
         
         if vendedores:
             for v in vendedores:
-                print(f"Matrícula: {v[0]}, Nome: {v[1]}, Comissão: {v[2]}")
+                print(f"Matrícula: {v[0]}, Nome: {v[1]}, Comissão: {v[2]}, Senha: {v[3]}")
         else:
             print("Nenhum vendedor encontrado.")
         
@@ -107,12 +107,12 @@ class VendedorService:
     def listar_todos():
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute('SELECT matricula, nome, comissao FROM cadastro.vendedor')
+        cur.execute('SELECT matricula, nome, comissao, senha FROM cadastro.vendedor')
         vendedores = cur.fetchall()
         
         if vendedores:
             for v in vendedores:
-                print(f"Matrícula: {v[0]}, Nome: {v[1]}, Comissão: {v[2]}")
+                print(f"Matrícula: {v[0]}, Nome: {v[1]}, Comissão: {v[2]}, Senha: {v[3]}")
         else:
             print("Nenhum vendedor cadastrado.")
         
@@ -125,11 +125,11 @@ class VendedorService:
 
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute('SELECT matricula, nome, comissao FROM cadastro.vendedor WHERE matricula = %s', (matricula,))
+        cur.execute('SELECT matricula, nome, comissao, senha FROM cadastro.vendedor WHERE matricula = %s', (matricula,))
         v = cur.fetchone()
         
         if v:
-            print(f"Matrícula: {v[0]}, Nome: {v[1]}, Comissão: {v[2]}")
+            print(f"Matrícula: {v[0]}, Nome: {v[1]}, Comissão: {v[2]}, Senha: {v[3]}")
         else:
             print("Vendedor não encontrado.")
         
